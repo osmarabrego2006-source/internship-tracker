@@ -1,0 +1,27 @@
+# docker-compose.yml reads the file and creates containers
+# Containers: small isolated linux environments
+
+name: applicationtracker
+services:  # lists every container
+  db:  # name matters for commands, e.g. docker compose logs db
+    image: postgres:16  # prebuilt image, postgres - image, :16 - tag (version)
+
+    # postgres image reads only the first time it starts with empty data
+    # first start:
+      # creates user named "tracker" with that password
+      # creates database named "tracker"
+    # any changes later will do nothing
+    environment:
+      POSTGRES_USER: tracker
+      POSTGRES_PASSWORD: tracker
+      POSTGRES_DB: tracker
+
+    # Format: "HOST:CONTAINER"
+    # Traffic at Windows port 5432 forwarded to container port 5432
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Postgres data files location
+volumes:
+  pgdata:
