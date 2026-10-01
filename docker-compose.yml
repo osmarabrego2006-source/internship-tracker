@@ -19,7 +19,7 @@ services:  # lists every container
     # Format: "HOST:CONTAINER"
     # Traffic at Windows port 5432 forwarded to container port 5432
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
     volumes:
       - pgdata:/var/lib/postgresql/data  # Postgres data files location
